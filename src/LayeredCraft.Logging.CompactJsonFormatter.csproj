@@ -12,6 +12,7 @@
     <Description>A high-performance Serilog formatter that outputs compact JSON optimized for AWS CloudWatch metric filters and structured log analysis.</Description>
     <PackageTags>serilog;logging;json;aws;cloudwatch;structured-logging</PackageTags>
     <PackageIcon>icon.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <Copyright>Copyright (c) 2025 LayeredCraft</Copyright>
   </PropertyGroup>
 
@@ -21,7 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="../icon.png" Pack="true" PackagePath="\" />
+    <None Include="../icon.png" Pack="true" PackagePath="" Visible="False"/>
+    <None Include="../README.md" Pack="true" PackagePath="" Visible="False"/>
   </ItemGroup>
 
 </Project>
