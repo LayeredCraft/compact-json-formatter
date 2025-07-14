@@ -14,8 +14,9 @@ Since this is a .NET project, use standard dotnet CLI commands:
 # Build the solution
 dotnet build
 
-# Run tests
-dotnet test
+# Run tests (xUnit v3 with Microsoft.Testing.Platform)
+dotnet run --project test --framework net8.0
+dotnet run --project test --framework net9.0
 
 # Restore packages
 dotnet restore
@@ -29,11 +30,28 @@ dotnet clean
 
 ## Project Structure
 
-- **src/LayeredCraft.Logging.CompactJsonFormatter.csproj**: Main class library project
-- **test/LayeredCraft.Logging.CompactJsonFormatter.Tests.csproj**: xUnit test project
-- **LayeredCraft.Logging.CompactJsonFormatter.sln**: Visual Studio solution file with src and test solution folders
-- **src/CompactJsonFormatter.cs**: Main formatter implementation
-- **README.md**: Project description with badges
+```
+compact-json-formatter/
+├── src/
+│   ├── LayeredCraft.Logging.CompactJsonFormatter.csproj (Main library)
+│   └── CompactJsonFormatter.cs (Main formatter implementation)
+├── test/
+│   ├── LayeredCraft.Logging.CompactJsonFormatter.Tests.csproj (xUnit v3 test project)
+│   ├── CompactJsonFormatterTests.cs (26 comprehensive unit tests)
+│   ├── TestHelpers.cs (Test utilities and helpers)
+│   └── xunit.runner.json (xUnit configuration)
+├── .github/
+│   ├── workflows/
+│   │   ├── build.yaml (CI/CD for main branch)
+│   │   └── pr-build.yaml (PR validation)
+│   └── dependabot.yml (Dependency management)
+├── LayeredCraft.Logging.CompactJsonFormatter.sln (Solution with organized folders)
+├── Directory.Build.props (Shared project configuration)
+├── README.md (Comprehensive documentation with examples)
+├── CLAUDE.md (This file)
+├── icon.png (NuGet package icon)
+└── .gitignore (Comprehensive exclusions for .NET, macOS, JetBrains IDEs)
+```
 
 ## Key Information
 
@@ -46,7 +64,44 @@ dotnet clean
 
 ## Development Notes
 
-- The main formatter class is `CompactJsonFormatter` in the `LayeredCraft.Logging.CompactJsonFormatter` namespace
-- Uses standard Serilog dependencies: `Serilog` and `Serilog.Formatting.Compact`
-- Test project uses xUnit v2 (latest stable version)
-- Package is configured to generate on build with proper NuGet metadata
+- **Main Implementation**: `CompactJsonFormatter` class in `LayeredCraft.Logging.CompactJsonFormatter` namespace
+- **Dependencies**: Uses `Serilog.Formatting.Compact` and `Microsoft.SourceLink.GitHub`
+- **Test Framework**: xUnit v3 with Microsoft.Testing.Platform runner
+- **Test Libraries**: NSubstitute for mocking, AwesomeAssertions for fluent assertions
+- **Test Coverage**: 26 unit tests covering all major functionality and edge cases
+- **Package Configuration**: Auto-generates NuGet package on build with icon and source link
+
+## Test Execution
+
+The project uses xUnit v3 with Microsoft.Testing.Platform. To run tests:
+
+```bash
+# Run all tests on .NET 9.0
+cd test && dotnet run --framework net9.0
+
+# Run all tests on .NET 8.0
+cd test && dotnet run --framework net8.0
+
+# Build and run tests from solution root
+dotnet build
+dotnet run --project test --framework net9.0
+```
+
+## GitHub Integration
+
+- **CI/CD**: Automated build and test workflows
+- **PR Validation**: Comprehensive PR checks with test execution
+- **Dependency Management**: Dependabot for automatic dependency updates
+- **Package Publishing**: Automated NuGet package generation and publishing
+
+## Testing Strategy
+
+The test suite includes:
+- **Constructor Tests**: Default and custom JsonValueFormatter scenarios
+- **Format Method Tests**: Instance method with newline handling and null validation
+- **FormatEvent Static Method Tests**: Core formatting logic with comprehensive scenarios
+- **Edge Cases**: CloudWatch compatibility, trace/span support, exception handling
+- **Property Handling**: Regular properties and @ prefix conversion
+- **JSON Validation**: Proper structure and content validation using System.Text.Json
+
+All tests pass on both target frameworks and provide excellent code coverage.
