@@ -1,0 +1,17 @@
+<Project>
+    <PropertyGroup>
+        <VersionPrefix>1.0.0</VersionPrefix>
+        <!-- SPDX license identifier for MIT -->
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+
+        <!-- Other useful metadata -->
+        <RepositoryUrl>https://github.com/LayeredCraft/compact-json-formatter</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <Authors>Nick Cipollina</Authors>
+        <PackageProjectUrl>https://github.com/LayeredCraft/compact-json-formatter</PackageProjectUrl>
+    </PropertyGroup>
+    <!-- Globally disable packing for any test project that sets IsTestProject=true -->
+    <PropertyGroup Condition="'$(IsTestProject)' == 'true'">
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+</Project>
