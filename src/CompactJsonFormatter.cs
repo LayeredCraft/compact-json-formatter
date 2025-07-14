@@ -20,6 +20,22 @@ namespace LayeredCraft.Logging.CompactJsonFormatter;
 /// </summary>
 public sealed class CompactJsonFormatter : ITextFormatter
 {
+    // JSON property names for CloudWatch-compatible metadata fields
+    /// <summary>Timestamp property name (replaces standard @t)</summary>
+    private const string TimestampProperty = "_t";
+    /// <summary>Message template property name (replaces standard @mt)</summary>
+    private const string MessageTemplateProperty = "_mt";
+    /// <summary>Log level property name (replaces standard @l)</summary>
+    private const string LevelProperty = "_l";
+    /// <summary>Exception property name (replaces standard @x)</summary>
+    private const string ExceptionProperty = "_x";
+    /// <summary>Renderings array property name (replaces standard @r)</summary>
+    private const string RenderingsProperty = "_r";
+    /// <summary>Trace ID property name (replaces standard @tr)</summary>
+    private const string TraceIdProperty = "_tr";
+    /// <summary>Span ID property name (replaces standard @sp)</summary>
+    private const string SpanIdProperty = "_sp";
+    
     readonly JsonValueFormatter _valueFormatter;
 
     /// <summary>
@@ -57,9 +73,9 @@ public sealed class CompactJsonFormatter : ITextFormatter
         if (output == null) throw new ArgumentNullException(nameof(output));
         if (valueFormatter == null) throw new ArgumentNullException(nameof(valueFormatter));
 
-        output.Write("{\"_t\":\"");
+        output.Write($"{{\"{TimestampProperty}\":\"");
         output.Write(logEvent.Timestamp.UtcDateTime.ToString("O"));
-        output.Write("\",\"_mt\":");
+        output.Write($"\",\"{MessageTemplateProperty}\":");
         JsonValueFormatter.WriteQuotedJsonString(logEvent.MessageTemplate.Text, output);
 
         var tokensWithFormat = logEvent.MessageTemplate.Tokens
@@ -70,7 +86,7 @@ public sealed class CompactJsonFormatter : ITextFormatter
         // ReSharper disable once PossibleMultipleEnumeration
         if (tokensWithFormat.Any())
         {
-            output.Write(",\"_r\":[");
+            output.Write($",\"{RenderingsProperty}\":[");
             var delim = "";
             // ReSharper disable once PossibleMultipleEnumeration
             foreach (var r in tokensWithFormat)
@@ -87,27 +103,27 @@ public sealed class CompactJsonFormatter : ITextFormatter
 
         if (logEvent.Level != LogEventLevel.Information)
         {
-            output.Write(",\"_l\":\"");
+            output.Write($",\"{LevelProperty}\":\"");
             output.Write(logEvent.Level);
             output.Write('\"');
         }
 
         if (logEvent.Exception != null)
         {
-            output.Write(",\"_x\":");
+            output.Write($",\"{ExceptionProperty}\":");
             JsonValueFormatter.WriteQuotedJsonString(logEvent.Exception.ToString(), output);
         }
 
         if (logEvent.TraceId != null)
         {
-            output.Write(",\"_tr\":\"");
+            output.Write($",\"{TraceIdProperty}\":\"");
             output.Write(logEvent.TraceId.Value.ToHexString());
             output.Write('\"');
         }
 
         if (logEvent.SpanId != null)
         {
-            output.Write(",\"_sp\":\"");
+            output.Write($",\"{SpanIdProperty}\":\"");
             output.Write(logEvent.SpanId.Value.ToHexString());
             output.Write('\"');
         }
