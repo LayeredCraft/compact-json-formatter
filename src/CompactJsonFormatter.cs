@@ -80,15 +80,13 @@ public sealed class CompactJsonFormatter : ITextFormatter
 
         var tokensWithFormat = logEvent.MessageTemplate.Tokens
             .OfType<PropertyToken>()
-            .Where(pt => pt.Format != null);
+            .Where(pt => pt.Format != null)
+            .ToList();
 
-        // Better not to allocate an array in the 99.9% of cases where this is false
-        // ReSharper disable once PossibleMultipleEnumeration
-        if (tokensWithFormat.Any())
+        if (tokensWithFormat.Count > 0)
         {
             output.Write($",\"{RenderingsProperty}\":[");
             var delim = "";
-            // ReSharper disable once PossibleMultipleEnumeration
             foreach (var r in tokensWithFormat)
             {
                 output.Write(delim);

@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Text.Json;
+using AwesomeAssertions;
 using Serilog.Events;
 using Serilog.Parsing;
 
@@ -75,28 +76,20 @@ internal static class TestHelpers
 
     public static void AssertJsonProperty(JsonDocument document, string propertyName, string expectedValue)
     {
-        if (!document.RootElement.TryGetProperty(propertyName, out var property))
-        {
-            throw new ArgumentException($"Property '{propertyName}' not found in JSON");
-        }
+        document.RootElement.TryGetProperty(propertyName, out var property)
+            .Should().BeTrue($"Property '{propertyName}' should be found in JSON");
 
-        if (property.GetString() != expectedValue)
-        {
-            throw new ArgumentException($"Property '{propertyName}' expected '{expectedValue}' but got '{property.GetString()}'");
-        }
+        property.GetString().Should().Be(expectedValue, 
+            $"Property '{propertyName}' should have the expected value");
     }
 
     public static void AssertJsonProperty(JsonDocument document, string propertyName, JsonValueKind expectedType)
     {
-        if (!document.RootElement.TryGetProperty(propertyName, out var property))
-        {
-            throw new ArgumentException($"Property '{propertyName}' not found in JSON");
-        }
+        document.RootElement.TryGetProperty(propertyName, out var property)
+            .Should().BeTrue($"Property '{propertyName}' should be found in JSON");
 
-        if (property.ValueKind != expectedType)
-        {
-            throw new ArgumentException($"Property '{propertyName}' expected type '{expectedType}' but got '{property.ValueKind}'");
-        }
+        property.ValueKind.Should().Be(expectedType,
+            $"Property '{propertyName}' should have the expected type");
     }
 
     public static bool JsonContainsProperty(JsonDocument document, string propertyName)
@@ -106,20 +99,16 @@ internal static class TestHelpers
 
     public static string GetJsonProperty(JsonDocument document, string propertyName)
     {
-        if (!document.RootElement.TryGetProperty(propertyName, out var property))
-        {
-            throw new ArgumentException($"Property '{propertyName}' not found in JSON");
-        }
+        document.RootElement.TryGetProperty(propertyName, out var property)
+            .Should().BeTrue($"Property '{propertyName}' should be found in JSON");
 
         return property.GetString() ?? string.Empty;
     }
 
     public static JsonElement GetJsonPropertyElement(JsonDocument document, string propertyName)
     {
-        if (!document.RootElement.TryGetProperty(propertyName, out var property))
-        {
-            throw new ArgumentException($"Property '{propertyName}' not found in JSON");
-        }
+        document.RootElement.TryGetProperty(propertyName, out var property)
+            .Should().BeTrue($"Property '{propertyName}' should be found in JSON");
 
         return property;
     }
