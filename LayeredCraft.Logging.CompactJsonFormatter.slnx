@@ -1,0 +1,20 @@
+<Solution>
+  <Folder Name="/git/">
+    <File Path=".github/dependabot.yml" />
+    <File Path=".github/workflows/build.yaml" />
+    <File Path=".github/workflows/pr-build.yaml" />
+    <File Path=".gitignore" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="CLAUDE.md" />
+    <File Path="Directory.Build.props" />
+    <File Path="icon.png" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/LayeredCraft.Logging.CompactJsonFormatter.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/LayeredCraft.Logging.CompactJsonFormatter.Tests.csproj" />
+  </Folder>
+</Solution>
