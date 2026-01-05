@@ -1,29 +1,29 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
-    <LangVersion>latest</LangVersion>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageId>LayeredCraft.Logging.CompactJsonFormatter</PackageId>
-    <Company>LayeredCraft</Company>
-    <Product>LayeredCraft.Logging.CompactJsonFormatter</Product>
-    <Description>A high-performance Serilog formatter that outputs compact JSON optimized for AWS CloudWatch metric filters and structured log analysis.</Description>
-    <PackageTags>serilog;logging;json;aws;cloudwatch;structured-logging</PackageTags>
-    <PackageIcon>icon.png</PackageIcon>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Copyright>Copyright (c) 2025 LayeredCraft</Copyright>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageId>LayeredCraft.Logging.CompactJsonFormatter</PackageId>
+        <Company>LayeredCraft</Company>
+        <Product>LayeredCraft.Logging.CompactJsonFormatter</Product>
+        <Description>A high-performance Serilog formatter that outputs compact JSON optimized for AWS CloudWatch metric filters and structured log analysis.</Description>
+        <PackageTags>serilog;logging;json;aws;cloudwatch;structured-logging</PackageTags>
+        <PackageIcon>icon.png</PackageIcon>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <Copyright>Copyright (c) 2025 LayeredCraft</Copyright>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Serilog.Formatting.Compact" Version="3.0.0" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="all" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Serilog.Formatting.Compact" Version="3.0.0"/>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="all"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <None Include="../icon.png" Pack="true" PackagePath="/" Visible="False"/>
-    <None Include="../README.md" Pack="true" PackagePath="/" Visible="False"/>
-  </ItemGroup>
+    <ItemGroup>
+        <None Include="../icon.png" Pack="true" PackagePath="/" Visible="False"/>
+        <None Include="../README.md" Pack="true" PackagePath="/" Visible="False"/>
+    </ItemGroup>
 
 </Project>
