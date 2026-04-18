@@ -1,6 +1,6 @@
 # LayeredCraft.Logging.CompactJsonFormatter
 
-[![Build Status](https://github.com/LayeredCraft/compact-json-formatter/actions/workflows/build.yaml/badge.svg)](https://github.com/LayeredCraft/compact-json-formatter/actions/workflows/build.yaml)
+[![Build Status](https://github.com/LayeredCraft/compact-json-formatter/actions/workflows/pr-build.yaml/badge.svg)](https://github.com/LayeredCraft/compact-json-formatter/actions/workflows/pr-build.yaml)
 [![NuGet](https://img.shields.io/nuget/v/LayeredCraft.Logging.CompactJsonFormatter.svg)](https://www.nuget.org/packages/LayeredCraft.Logging.CompactJsonFormatter/)
 [![Downloads](https://img.shields.io/nuget/dt/LayeredCraft.Logging.CompactJsonFormatter.svg)](https://www.nuget.org/packages/LayeredCraft.Logging.CompactJsonFormatter/)
 
@@ -116,8 +116,11 @@ compact-json-formatter/
 │   └── LayeredCraft.Logging.CompactJsonFormatter.Tests.csproj
 ├── .github/
 │   ├── workflows/
-│   │   ├── build.yaml
-│   │   └── pr-build.yaml
+│   │   ├── pr-build.yaml
+│   │   ├── pr-title-check.yaml
+│   │   ├── publish-preview.yaml
+│   │   ├── publish-release.yaml
+│   │   └── release-drafter.yaml
 │   └── dependabot.yml
 ├── Directory.Build.props
 ├── README.md

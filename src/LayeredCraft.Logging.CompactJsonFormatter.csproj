@@ -13,7 +13,7 @@
         <PackageTags>serilog;logging;json;aws;cloudwatch;structured-logging</PackageTags>
         <PackageIcon>icon.png</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <Copyright>Copyright (c) 2025 LayeredCraft</Copyright>
+        <Copyright>Copyright (c) 2026 LayeredCraft</Copyright>
     </PropertyGroup>
 
     <ItemGroup>
