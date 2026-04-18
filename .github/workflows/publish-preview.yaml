@@ -1,0 +1,25 @@
+name: Publish Preview
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'docs/**'
+      - 'README.md'
+
+permissions: write-all
+
+jobs:
+  publish:
+    uses: LayeredCraft/devops-templates/.github/workflows/publish-preview.yml@main
+    with:
+      solution: LayeredCraft.Logging.CompactJsonFormatter.slnx
+      dotnetVersion: |
+        8.0.x
+        9.0.x
+        10.0.x
+        11.0.x
+      hasTests: true
+    secrets: inherit
