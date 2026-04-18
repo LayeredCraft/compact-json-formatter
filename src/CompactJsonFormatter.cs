@@ -69,9 +69,9 @@ public sealed class CompactJsonFormatter : ITextFormatter
     /// <param name="valueFormatter">A value formatter for <see cref="LogEventPropertyValue"/>s on the event.</param>
     public static void FormatEvent(LogEvent logEvent, TextWriter output, JsonValueFormatter valueFormatter)
     {
-        if (logEvent == null) throw new ArgumentNullException(nameof(logEvent));
-        if (output == null) throw new ArgumentNullException(nameof(output));
-        if (valueFormatter == null) throw new ArgumentNullException(nameof(valueFormatter));
+        ArgumentNullException.ThrowIfNull(logEvent);
+        ArgumentNullException.ThrowIfNull(output);
+        ArgumentNullException.ThrowIfNull(valueFormatter);
 
         output.Write($"{{\"{TimestampProperty}\":\"");
         output.Write(logEvent.Timestamp.UtcDateTime.ToString("O"));
