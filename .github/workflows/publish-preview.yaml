@@ -10,12 +10,25 @@ on:
       - 'README.md'
 
 permissions:
-  contents: write
-  pull-requests: write
-  id-token: write
+  contents: read
 
 jobs:
+  get-nuget-token:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    outputs:
+      nuget_api_key: ${{ steps.login.outputs.NUGET_API_KEY }}
+    steps:
+      - name: NuGet Login (OIDC)
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: ${{ secrets.NUGET_USER }}
+
   publish:
+    needs: get-nuget-token
     uses: LayeredCraft/devops-templates/.github/workflows/publish-preview.yml@ci/github-nuget-oidc-login
     with:
       solution: LayeredCraft.Logging.CompactJsonFormatter.slnx
@@ -25,4 +38,5 @@ jobs:
         10.0.x
         11.0.x
       hasTests: true
-    secrets: inherit
+    secrets:
+      NUGET_API_KEY: ${{ needs.get-nuget-token.outputs.nuget_api_key }}
