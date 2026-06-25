@@ -39,5 +39,4 @@ jobs:
         10.0.x
         11.0.x
       hasTests: true
-    secrets:
-      NUGET_API_KEY: ${{ needs.get-nuget-token.outputs.nuget_api_key }}
+      nuget_api_key: ${{ needs.get-nuget-token.outputs.nuget_api_key }}
