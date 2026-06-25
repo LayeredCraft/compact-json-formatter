@@ -10,7 +10,8 @@ on:
       - 'README.md'
 
 permissions:
-  contents: read
+  contents: write
+  pull-requests: write
 
 jobs:
   get-nuget-token:
