@@ -9,7 +9,9 @@ on:
       - 'docs/**'
       - 'README.md'
 
-permissions: write-all
+permissions:
+  contents: read
+  id-token: write
 
 jobs:
   publish:
