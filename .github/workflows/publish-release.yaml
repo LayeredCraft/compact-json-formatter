@@ -4,10 +4,11 @@ on:
   release:
     types: [published]
 
-permissions: write-all
+permissions:
+  contents: write
 
 jobs:
-  publish:
+  build:
     uses: LayeredCraft/devops-templates/.github/workflows/publish-release.yml@ci/github-nuget-oidc-login
     with:
       solution: LayeredCraft.Logging.CompactJsonFormatter.slnx
@@ -18,3 +19,14 @@ jobs:
         11.0.x
       hasTests: true
     secrets: inherit
+
+  push:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: LayeredCraft/devops-templates/.github/actions/nuget-push@ci/github-nuget-oidc-login
+        with:
+          nuget_user: ${{ secrets.NUGET_USER }}
